@@ -6,8 +6,10 @@
 #define MAX_CUV 3
 #define SECUNDE_PE_MINUT 60
 #define SECUNDE_PE_ORA 3600
+#define ORE_PE_ZI 24
 using namespace std;
-unsigned long long oraTimer, ore, minute, secunde;
+unsigned long long oraTimer;
+unsigned zile, ore, minute, secunde;
 void citesteDateleDeIntrare();
 void determinaOraLaCareSemnalulSonorVaFiEmis();
 void afiseazaDateleDeIesire();
@@ -21,8 +23,22 @@ int main()
 void afiseazaDateleDeIesire()
 {
     ofstream fout("timer.out");
-    fout << oraTimer << endl;
-    fout << ore << ' ' << minute << ' ' << secunde <<endl;
+    if (ore < 10)
+	    fout << 0 << ore;
+    else
+	    fout << ore;
+    fout << ':';
+    if (minute < 10)
+	    fout << 0 << minute;
+    else
+	    fout << minute;
+    fout << ':';
+    if (secunde < 10)
+	    fout << 0 << secunde;
+    else
+	    fout << secunde;
+    if (zile > 0)
+	    fout << '+' << zile;
     fout.close();
 }
 unsigned long long convertesteInSecunde(char sir[MAX_LG_SIR])
@@ -53,10 +69,10 @@ unsigned long long convertesteInSecunde(char sir[MAX_LG_SIR])
 }
 void determinaOraLaCareSemnalulSonorVaFiEmis()
 {
-    ore = oraTimer/SECUNDE_PE_ORA;
-    minute = (oraTimer%SECUNDE_PE_ORA)/SECUNDE_PE_MINUT;
-    secunde = (oraTimer%SECUNDE_PE_ORA)%SECUNDE_PE_MINUT;
-    // TODO
+    zile = oraTimer / SECUNDE_PE_ORA / ORE_PE_ZI;
+    ore = oraTimer / SECUNDE_PE_ORA % ORE_PE_ZI;
+    minute = oraTimer % SECUNDE_PE_ORA / SECUNDE_PE_MINUT;
+    secunde = oraTimer % SECUNDE_PE_ORA % SECUNDE_PE_MINUT;
 }
 void citesteDateleDeIntrare()
 {
