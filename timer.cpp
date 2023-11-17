@@ -55,14 +55,14 @@ unsigned long long convertesteInSecunde(char sir[MAX_LG_SIR])
     switch (nr)
     {
         case 1:
-            return atoi(parteaIntreaga[0]);
+            return atoll(parteaIntreaga[0]);
         case 2:
-            return SECUNDE_PE_MINUT*atoi(parteaIntreaga[0])
-                + atoi(parteaIntreaga[1]);
+            return SECUNDE_PE_MINUT * atoll(parteaIntreaga[0])
+                + atoll(parteaIntreaga[1]);
         case 3:
-            return SECUNDE_PE_ORA*atoi(parteaIntreaga[0])
-                + SECUNDE_PE_MINUT*atoi(parteaIntreaga[1])
-                + atoi(parteaIntreaga[2]);
+            return SECUNDE_PE_ORA * atoll(parteaIntreaga[0])
+                + SECUNDE_PE_MINUT * atoll(parteaIntreaga[1])
+                + atoll(parteaIntreaga[2]);
         default:
             return 0;
     }
@@ -80,5 +80,6 @@ void citesteDateleDeIntrare()
     char oraCurenta[MAX_LG_SIR], timpDeAsteptare[MAX_LG_SIR];
     fin >> oraCurenta;
     fin >> timpDeAsteptare;
-    oraTimer = convertesteInSecunde(oraCurenta) + convertesteInSecunde(timpDeAsteptare);
+    oraTimer = convertesteInSecunde(oraCurenta)
+               + convertesteInSecunde(timpDeAsteptare);
 }
